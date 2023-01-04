@@ -55,22 +55,16 @@ class API {
 
     return decodedResponse;
   }
+
+  Future<Map> getQuestionsAnswers(idQuiz) async {
+    var url = Uri.http(_host, 'quiz/${idQuiz.Questions.id}');
+
+    var response = await http.get(url);
+
+    var decodedResponse =
+        await jsonDecode(utf8.decode(response.bodyBytes)) as Map;
+    print(decodedResponse);
+
+    return decodedResponse;
+  }
 }
-
-// class Quiz {
-//   var _id;
-//   var _nameOwner;
-//   var _createdAt;
-//   var _updatedAt;
-//   Question[] _questions;
-// }
-
-// class Question {
-//   var _id;
-//   var _description;
-//   var _answer1;
-//   var _answer2;
-//   var _answer3;
-//   var _answer4;
-//   var _correct;
-// }

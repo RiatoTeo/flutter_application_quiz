@@ -46,7 +46,6 @@ class _HostQuiz extends State<HostQuiz> {
             TextButton(
               onPressed: () => createNewQuiz(),
               style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(40)
-                  //internal content margin
                   ),
               child: const Text('crea le tue domande'),
             ),

@@ -14,37 +14,32 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          // centra le modalità di gioco
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
 
           children: [
-            // creo il bottone che ti indirizza alla modalità uno contro uno
             TextButton(
               onPressed: () async {
                 var message = await Navigator.push(context,
                     MaterialPageRoute(builder: (context) {
-                  return HostQuiz(); // ritorno l'oggetto della classe della modalità uno contro uno
+                  return HostQuiz(); 
                 }));
                 print(message);
               },
               style: ElevatedButton.styleFrom(padding: EdgeInsets.all(40)
-                  //internal content margin
                   ),
               child: const Text('inserisci il tuo nome e crea un nuovo quiz'),
             ),
 
-            // creo il bottone che ti indirizza alla modalità singola
             TextButton(
               onPressed: () async {
                 var message = await Navigator.push(context,
                     MaterialPageRoute(builder: (context) {
-                  return ClientQuiz(); // ritorno l'oggetto della classe della modalità contro il bot
+                  return ClientQuiz(); 
                 }));
                 print(message);
               },
               style: ElevatedButton.styleFrom(padding: EdgeInsets.all(40)
-                  //internal content margin
                   ),
               child: const Text(
                   'inserisci ID del tuo amico per partecipare al quiz'),

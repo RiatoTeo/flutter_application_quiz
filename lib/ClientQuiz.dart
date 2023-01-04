@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'QuizQuestionsAnswers.dart';
+import 'ClientQuizAnswers.dart';
 import 'API.dart';
 
 class ClientQuiz extends StatefulWidget {
@@ -16,9 +16,8 @@ class _ClientQuiz extends State<ClientQuiz> {
   var idQuiz = "";
 
   buttonPressed() async {
-    var quiz = API().getQuizById(idQuiz);
     await Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return QuizQuestionsAswers(name: name, quiz: quiz);
+      return ClientQuizAnswers(name: name, idQuiz: idQuiz);
     }));
   }
 
@@ -58,9 +57,8 @@ class _ClientQuiz extends State<ClientQuiz> {
             ),
             TextButton(
               onPressed: () => buttonPressed(),
-              style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(40)
-                  //internal content margin
-                  ),
+              style:
+                  ElevatedButton.styleFrom(padding: const EdgeInsets.all(40)),
               child: const Text('prova anche tu'),
             ),
           ],

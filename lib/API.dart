@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:http/http.dart' as http;
 
@@ -18,9 +17,30 @@ class API {
     return decodedResponse;
   }
 
+  Future<Map> getStatisticsById(id) async {
+    var url = Uri.http(_host, 'statistics/$id');
+    var response = await http.get(url);
+    print(json.decode(response.body));
+
+    var decodedResponse = json.decode(response.body) as Map;
+    print(decodedResponse);
+
+    return decodedResponse;
+  }
+
   Future<Map> newQuiz(name) async {
     var url = Uri.http(_host, 'quiz/$name');
 
+    var response = await http.put(url);
+
+    var decodedResponse =
+        await jsonDecode(utf8.decode(response.bodyBytes)) as Map;
+
+    return decodedResponse;
+  }
+
+  Future<Map> saveAnswer(idQuestion, name, answer) async {
+    var url = Uri.http(_host, 'submission/$idQuestion/$name/$answer');
     var response = await http.put(url);
 
     var decodedResponse =

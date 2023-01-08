@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -14,10 +15,16 @@ class HostQuiz extends StatefulWidget {
 class _HostQuiz extends State<HostQuiz> {
   final appTitle = 'Crea il tuo quiz, scrivendo le tue domande';
   String _name = "";
+  int idQuiz = -1;
 
   createNewQuiz() async {
-    Map quiz = await API().newQuiz(_name);
-    var idQuiz = quiz["id"];
+    if (idQuiz < 0) {
+      Map quiz = await API().newQuiz(_name);
+      setState(() {
+        idQuiz = quiz["id"];
+      });
+    }
+    print(idQuiz);
     await Navigator.push(context, MaterialPageRoute(builder: (context) {
       return HostPageQuestions(idQuiz: idQuiz);
     }));
@@ -45,9 +52,7 @@ class _HostQuiz extends State<HostQuiz> {
             ),
             TextButton(
               onPressed: () => createNewQuiz(),
-              style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(40)
-                  ),
-              child: const Text('crea le tue domande'),
+              child: const Text('Inizia ora'),
             ),
           ],
         ),

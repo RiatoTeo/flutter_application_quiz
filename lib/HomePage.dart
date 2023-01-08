@@ -4,49 +4,53 @@ import 'ClientQuiz.dart';
 import 'API.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: const Text("Quiz"),
       ),
       body: Center(
-        child: Column(
+          child: Column(children: [
+        Center(
+          child: Container(
+            child: Image.asset('assets/images/logo.png'),
+            width: 300,
+            margin: const EdgeInsets.symmetric(vertical: 10),
+          ),
+        ),
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-
           children: [
-            TextButton(
-              onPressed: () async {
-                var message = await Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                  return HostQuiz(); 
-                }));
-                print(message);
-              },
-              style: ElevatedButton.styleFrom(padding: EdgeInsets.all(40)
-                  ),
-              child: const Text('inserisci il tuo nome e crea un nuovo quiz'),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 5),
+              child: TextButton(
+                onPressed: () async {
+                  var message = await Navigator.push(context,
+                      MaterialPageRoute(builder: (context) {
+                    return HostQuiz();
+                  }));
+                },
+                child: const Text('Crea il tuo quiz'),
+              ),
             ),
-
-            TextButton(
-              onPressed: () async {
-                var message = await Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                  return ClientQuiz(); 
-                }));
-                print(message);
-              },
-              style: ElevatedButton.styleFrom(padding: EdgeInsets.all(40)
-                  ),
-              child: const Text(
-                  'inserisci ID del tuo amico per partecipare al quiz'),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 5),
+              child: TextButton(
+                onPressed: () async {
+                  var message = await Navigator.push(context,
+                      MaterialPageRoute(builder: (context) {
+                    return ClientQuiz();
+                  }));
+                },
+                child: const Text('Partecipare al quiz di un amico'),
+              ),
             ),
           ],
         ),
-      ),
+      ])),
     );
   }
 }

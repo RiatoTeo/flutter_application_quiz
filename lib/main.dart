@@ -13,11 +13,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Quiz Game',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.blue,
+            minimumSize: const Size(100.0, 20.0),
+            padding: const EdgeInsets.all(20),
+          ),
+        ),
       ),
-      home: HomePage(title: 'Quiz'),
+      home: const HomePage(),
     );
   }
 }

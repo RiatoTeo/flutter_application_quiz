@@ -3,8 +3,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'ClientQuizAnswers.dart';
+import 'ClientQuizAnswer.dart';
+import 'ClientQuizStatistics.dart';
 import 'API.dart';
+import 'ClientQuizHome.dart';
 
 class ClientQuiz extends StatefulWidget {
   @override
@@ -14,11 +16,28 @@ class ClientQuiz extends StatefulWidget {
 class _ClientQuiz extends State<ClientQuiz> {
   var name = "";
   var idQuiz = "";
+  var quiz = null;
+  int indexQuestion = 0;
 
-  buttonPressed() async {
-    await Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ClientQuizAnswers(name: name, idQuiz: idQuiz);
-    }));
+  void nextQuestion() {
+    setState(() {
+      indexQuestion = indexQuestion + 1;
+    });
+    print(indexQuestion);
+  }
+
+  setName(value) {
+    setState(() {
+      name = value;
+    });
+  }
+
+  setQuiz(value) async {
+    var tempQuiz = await API().getQuizById(value);
+    print(tempQuiz["Questions"].length);
+    setState(() {
+      quiz = tempQuiz;
+    });
   }
 
   @override
@@ -26,44 +45,17 @@ class _ClientQuiz extends State<ClientQuiz> {
     const appTitle = 'Partecipa al quiz del tuo amico';
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(appTitle),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 120, vertical: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Inserisci ID del tuo amico',
-                ),
-                onChanged: (value) => setState(() => idQuiz = value),
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 120, vertical: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Inserisci il tuo nome',
-                ),
-                onChanged: (value) => setState(() => name = value),
-              ),
-            ),
-            TextButton(
-              onPressed: () => buttonPressed(),
-              style:
-                  ElevatedButton.styleFrom(padding: const EdgeInsets.all(40)),
-              child: const Text('prova anche tu'),
-            ),
-          ],
+        appBar: AppBar(
+          title: const Text(appTitle),
         ),
-      ),
-    );
+        body: (quiz == null)
+            ? ClientQuizHome(setQuiz: setQuiz, setName: setName)
+            : (indexQuestion < quiz["Questions"].length)
+                ? ClientQuizAnswer(
+                    quiz: quiz,
+                    name: name,
+                    indexQuestion: indexQuestion,
+                    nextQuestion: nextQuestion)
+                : ClientQuizStatistics(name: name, idQuiz: quiz["id"]));
   }
 }

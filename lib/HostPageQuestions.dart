@@ -164,25 +164,6 @@ class _HostPageQuestions extends State<HostPageQuestions> {
                     ),
                   ],
                 )
-                // TextButton(
-                //   onPressed: () => createNewQuestion(),
-                //   style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(40)
-                //       //internal content margin
-                //       ),
-                //   child: const Text('procedi alla prossima domanda'),
-                // ),
-                // TextButton(
-                //   onPressed: () async {
-                //     var message = await Navigator.push(context,
-                //         MaterialPageRoute(builder: (context) {
-                //       return const HomePage(title: '');
-                //     }));
-                //     print(message);
-                //   },
-                //   style: ElevatedButton.styleFrom(padding: EdgeInsets.all(40)),
-                //   child: const Text(
-                //       'termina'),
-                // ),
               ],
             ),
           ),

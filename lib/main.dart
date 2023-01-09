@@ -29,7 +29,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// aggiungi pulsante exit dalle domande
-// aggiungi pulsante per vedere i risultati quando inserisici id e nome per partecipare ad un quiz
-// sistema layout

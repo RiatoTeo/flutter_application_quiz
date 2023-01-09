@@ -48,6 +48,20 @@ class _HostPageQuestions extends State<HostPageQuestions> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+                  child: Text(
+                    'ricorda il tuo ID sopra scritto dopo il "- id"',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontSize: 40,
+                      foreground: Paint()
+                        ..style = PaintingStyle.stroke
+                        ..strokeWidth = 6
+                        ..color = Colors.blue[700]!,
+                    ),
+                  ),
+                ),
+                Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
                   child: TextFormField(
@@ -130,7 +144,7 @@ class _HostPageQuestions extends State<HostPageQuestions> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 490, vertical: 16),
+                      const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
                   child: TextFormField(
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -144,23 +158,32 @@ class _HostPageQuestions extends State<HostPageQuestions> {
                       ),
                       onChanged: (value) => setState(() => correct = value)),
                 ),
-                Column(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextButton(
-                      onPressed: () => createNewQuestion(),
-                      child: const Text('procedi alla prossima domanda'),
+                    
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 5),
+                      child: TextButton(
+                        onPressed: () => createNewQuestion(),
+                        child: const Text('procedi alla prossima domanda'),
+                      ),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacement<void, void>(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => const HomePage(),
-                          ),
-                        );
-                      },
-                      child: const Text('termina'),
+
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 5),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacement<void, void>(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                                  const HomePage(),
+                            ),
+                          );
+                        },
+                        child: const Text('termina'),
+                      ),
                     ),
                   ],
                 )
